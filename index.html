@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>情報学部 学科診断 | 広島工業大学</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Kaku Gothic ProN','Meiryo',sans-serif;background:#f0f3f8;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem 3rem;}
+.container{width:100%;max-width:640px;}
+.header{text-align:center;margin-bottom:1.75rem;}
+.header h1{font-size:20px;font-weight:700;color:#1a3060;margin-bottom:6px;}
+.header p{font-size:13px;color:#777;}
+.prog-area{margin-bottom:1.75rem;}
+.prog-bar{height:5px;background:#dde3ee;border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;background:#1D9E75;border-radius:3px;transition:width 0.35s ease;}
+.prog-label{font-size:12px;color:#aaa;margin-top:6px;text-align:right;}
+.q-card{background:#fff;border:1px solid #e4e8f0;border-radius:16px;padding:1.75rem 1.75rem 1.4rem;box-shadow:0 2px 14px rgba(0,0,0,.07);animation:fi 0.28s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.q-num{font-size:11px;letter-spacing:.08em;color:#aaa;margin-bottom:9px;font-weight:600;}
+.q-text{font-size:18px;font-weight:700;color:#18182e;line-height:1.6;margin-bottom:.9rem;}
+.q-hint{font-size:13px;color:#555;line-height:1.65;padding:10px 14px;background:#f0f4fb;border-radius:9px;border-left:3px solid #5a8fe0;margin-bottom:1.1rem;}
+.choices{display:flex;flex-direction:column;gap:10px;}
+.c-btn{background:#f6f8fc;border:1.5px solid #dde3ee;border-radius:11px;padding:14px 18px;text-align:left;cursor:pointer;font-size:14px;color:#222;line-height:1.55;font-family:inherit;transition:border-color .13s,background .13s,transform .1s;}
+.c-btn:hover{border-color:#5a8fe0;background:#eef3fb;transform:translateY(-1px);}
+.c-btn:active{transform:scale(.99);}
+.back-btn{margin-top:14px;background:none;border:none;font-size:12px;color:#bbb;cursor:pointer;padding:3px 0;font-family:inherit;}
+.back-btn:hover{color:#888;}
+.result-wrap{animation:fi .3s ease;}
+.result-top{background:#fff;border:1px solid #e4e8f0;border-radius:16px;padding:2rem;box-shadow:0 2px 14px rgba(0,0,0,.07);margin-bottom:1rem;}
+.r-announce{font-size:13px;color:#999;margin-bottom:10px;letter-spacing:.04em;}
+.r-rank1-name{font-size:26px;font-weight:700;color:#18182e;margin-bottom:5px;}
+.r-catch{font-size:14px;color:#555;line-height:1.65;margin-bottom:1.1rem;}
+.r-ex{font-size:13px;line-height:1.75;padding:12px 16px;border-radius:10px;border-left:3px solid;margin-bottom:1.1rem;}
+.r-desc{font-size:15px;color:#333;line-height:1.85;margin-bottom:1.4rem;}
+.score-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.score-label{font-size:12px;width:130px;flex-shrink:0;font-weight:500;}
+.score-track{flex:1;height:7px;background:#eee;border-radius:4px;overflow:hidden;}
+.score-fill{height:100%;border-radius:4px;transition:width .55s ease;}
+.score-pct{font-size:12px;color:#aaa;width:34px;text-align:right;flex-shrink:0;}
+.r-pts{border-top:1px solid #eee;padding-top:1.1rem;margin-bottom:1.1rem;}
+.pt-row{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px;}
+.pt-ic{font-size:16px;flex-shrink:0;margin-top:1px;}
+.pt-tx{font-size:14px;color:#555;line-height:1.55;}
+.r-career-lbl{font-size:11px;color:#bbb;margin-bottom:4px;font-weight:600;letter-spacing:.04em;}
+.r-career{font-size:13px;color:#777;line-height:1.6;margin-bottom:1.5rem;}
+.r-link{display:inline-flex;align-items:center;gap:5px;font-size:14px;text-decoration:none;border:1.5px solid;border-radius:10px;padding:10px 18px;font-weight:600;transition:opacity .15s;}
+.r-link:hover{opacity:.7;}
+.others-title{font-size:13px;color:#888;margin-bottom:8px;}
+.rank-others{display:flex;flex-direction:column;gap:10px;margin-bottom:1rem;}
+.rank-card{background:#fff;border:1px solid #e4e8f0;border-radius:13px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(0,0,0,.05);}
+.rank-badge{font-size:13px;font-weight:700;flex-shrink:0;width:28px;text-align:center;padding-top:2px;}
+.rank-body{flex:1;}
+.rank-name{font-size:15px;font-weight:700;color:#18182e;margin-bottom:3px;}
+.rank-sub{font-size:13px;color:#777;line-height:1.5;}
+.rank-bar-wrap{margin-top:8px;height:5px;background:#eee;border-radius:3px;overflow:hidden;}
+.rank-bar{height:100%;border-radius:3px;transition:width .5s ease;}
+.rank-pct{font-size:11px;color:#bbb;margin-top:3px;}
+.rank-link{font-size:12px;text-decoration:none;flex-shrink:0;align-self:center;font-weight:600;}
+.retry-btn{margin-top:10px;background:none;border:1.5px solid #dde3ee;border-radius:11px;padding:12px 18px;font-size:14px;color:#999;cursor:pointer;display:block;width:100%;font-family:inherit;transition:border-color .15s,color .15s;}
+.retry-btn:hover{border-color:#999;color:#444;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>情報学部 学科診断</h1>
+    <p>広島工業大学 情報学部</p>
+  </div>
+  <div class="prog-area">
+    <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div class="prog-label" id="prog-label"></div>
+  </div>
+  <div id="main"></div>
+</div>
+<script>
+const DEPT={
+  cs:{name:"情報工学科",catch:"コンピュータ・ネットワーク・IoTの技術を極める",color:"#0F6E56",bg:"#e6f7f2",exborder:"#1D9E75",ex:"たとえば…スマホがWi-Fiにつながる仕組みや、自動運転車がセンサーで周りを感じとる仕組みを「設計する側」になれます。",desc:"コンピュータの仕組みやネットワーク・IoT・AIなど、情報通信の根幹となる技術を体系的に学びます。機器やシステムの「中身」をつくりたい人に向いています。",points:[{ic:"💻",t:"コンピュータ・OS・組込みシステムの仕組みを深く学ぶ"},{ic:"📡",t:"ネットワーク・クラウド・IoT・セキュリティをカバー"},{ic:"🤖",t:"センシング・VR・AIなど最先端技術にも対応"}],career:"システムエンジニア、ネットワーク技術者、IoTエンジニア、AIエンジニア など",url:"https://www.it-hiroshima.ac.jp/faculty/information/computer/"},
+  sys:{name:"情報システム学科",catch:"アプリ・Webサービス・AIで「使いやすい」ものをつくる",color:"#1E5AA8",bg:"#eaf2ff",exborder:"#2F6FD6",ex:"たとえば…「このアプリ、なんか使いにくいな」と感じたとき、どう直せば使いやすくなるかを考えて実際につくれるエンジニアになれます。",desc:"スマホアプリやWebサービス、AIシステムの開発を中心に学びます。「使いやすさ」やデザインにこだわって、多くの人に届くものをつくりたい人に向いています。",points:[{ic:"📱",t:"アプリ・Webシステム・AIシステムの開発を実践的に学ぶ"},{ic:"🎨",t:"UI/UXデザインや人間中心設計で使いやすさを追究"},{ic:"🧠",t:"機械学習・画像認識・自然言語処理などのAI技術も習得"}],career:"アプリエンジニア、Webデザイナー・クリエイター、システムエンジニア など",url:"https://www.it-hiroshima.ac.jp/faculty/information/systems/"},
+  mg:{name:"情報マネジメント学科",catch:"データで「なぜ？」を解き明かし、ビジネスや社会を動かす",color:"#854F0B",bg:"#fef3e2",exborder:"#BA7517",ex:"たとえば…Amazonの「おすすめ商品」や、NetflixやYouTubeの「次にこれどう？」という表示も、この学科で学ぶデータサイエンスの技術でできています。",desc:"データを分析して「なぜ売れるのか」「誰に届けるか」を解き明かす力を身につけます。身近なサービスの裏側を支えるデータ活用の技術を、経営やマーケティングの知識と合わせて学びます。",points:[{ic:"📊",t:"データサイエンス・機械学習・ビッグデータ活用を学ぶ"},{ic:"✨",t:"おすすめ機能・広告の最適化・需要予測などの仕組みを設計"},{ic:"📈",t:"マーケティング・経営の知識と組み合わせてビジネスに応用"}],career:"データサイエンティスト、マーケットリサーチャー、AIエンジニア、SE など",url:"https://www.it-hiroshima.ac.jp/faculty/information/management/"}
+};
+
+const QS=[
+  {id:"q1",text:"ゲームやアプリで遊んでいるとき、どんなことが頭に浮かびやすい？",choices:[
+    {label:"裏側の通信やサーバー、端末の仕組みが気になる",scores:{cs:3,sys:1,mg:0}},
+    {label:"画面の分かりやすさや操作の流れをもっと良くしたくなる",scores:{cs:0,sys:3,mg:1}},
+    {label:"どんな人に人気で、なぜ広がったのかをデータで確かめたくなる",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q2",text:"もし学校でプログラミングを作るとしたら、どれが一番楽しそう？",choices:[
+    {label:"センサーや通信を使って、モノの状態を取得・制御するプログラム",scores:{cs:3,sys:1,mg:0}},
+    {label:"スマホやパソコンで使いやすく操作できるアプリやWebサービス",scores:{cs:0,sys:3,mg:1}},
+    {label:"アンケートや売上などのデータを集計・予測するツール",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q3",text:"友達と新しいサービスを作るとしたら、自分はどの役割をやりたい？",choices:[
+    {label:"安定して動く基盤や通信処理を設計する担当",scores:{cs:3,sys:1,mg:0}},
+    {label:"画面のデザインや操作しやすさを考えてつくる担当",scores:{cs:0,sys:3,mg:1}},
+    {label:"誰にどんな価値があるかをデータや市場から考える担当",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q4",text:"YouTubeやSNSを見ているとき、一番気になりやすいのはどれ？",choices:[
+    {label:"大量の情報をすばやく処理するサーバーやAI基盤の仕組み",scores:{cs:3,sys:1,mg:0}},
+    {label:"動画や投稿を探しやすく見せる画面や操作の工夫",scores:{cs:0,sys:3,mg:1}},
+    {label:"視聴履歴や評価データから好みをどう分析しているか",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q5",text:"インターネットやスマホについて、一番「もっと知りたい」と思うのはどれ？",choices:[
+    {label:"Wi-Fi、Bluetooth、クラウド、セキュリティなどの技術的な仕組み",scores:{cs:3,sys:1,mg:0}},
+    {label:"アプリやWebサービスを使いやすく設計・開発する方法",scores:{cs:0,sys:3,mg:1}},
+    {label:"集めたデータを企業活動や地域課題の解決に活用する方法",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q6",text:"将来、作ったものを見て一番「やったー！」と思えそうなのは？",choices:[
+    {label:"ネットワークやIoTの仕組みが社会の中で安定して動いているとき",scores:{cs:3,sys:1,mg:0}},
+    {label:"自分が作ったサービスを多くの人が「使いやすい」と言ってくれたとき",scores:{cs:0,sys:3,mg:1}},
+    {label:"自分の分析が課題発見や売上改善などの成果につながったとき",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q7",text:"友達と旅行の計画を立てるとき、自分が自然とやってしまうのは？",choices:[
+    {label:"地図アプリや交通情報を調べて、移動ルートや時刻表を最適化する",scores:{cs:3,sys:1,mg:0}},
+    {label:"宿やお店の写真・雰囲気をチェックして、「ここ絶対いい!」と提案する",scores:{cs:0,sys:3,mg:1}},
+    {label:"口コミの評価数や値段を比べて、コスパが一番いいプランを見つける",scores:{cs:1,sys:0,mg:3}}
+  ]},
+  {id:"q8",text:"「IT系の仕事をする」として、自分が一番かっこいいと思うのはどんな場面？",choices:[
+    {label:"ネットワークやクラウドを設計して、障害に強い仕組みを支える場面",scores:{cs:3,sys:1,mg:0}},
+    {label:"ユーザーの声をもとにアプリを改善して、満足度を高める場面",scores:{cs:0,sys:3,mg:1}},
+    {label:"データ分析の結果から、企画や経営判断を提案する場面",scores:{cs:1,sys:0,mg:3}}
+  ]}
+];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+const TOTAL=QS.length;
+let answers=[],currentQ=0,shuffledChoices=[];
+
+function buildShuffledChoices(){
+  shuffledChoices=QS.map(q=>shuffle(q.choices));
+}
+function calcScores(){
+  const s={cs:0,sys:0,mg:0};
+  answers.forEach(a=>{s.cs+=a.scores.cs;s.sys+=a.scores.sys;s.mg+=a.scores.mg;});
+  return s;
+}
+function ranking(s){
+  return shuffle(['cs','sys','mg']).map(k=>({key:k,score:s[k]})).sort((a,b)=>b.score-a.score);
+}
+function updateProg(){
+  document.getElementById('prog').style.width=(currentQ/TOTAL*100)+'%';
+  document.getElementById('prog-label').textContent=currentQ<TOTAL?currentQ+' / '+TOTAL:TOTAL+' / '+TOTAL;
+}
+function render(){
+  updateProg();
+  const main=document.getElementById('main');main.innerHTML='';
+  const q=QS[currentQ];
+  const orderedChoices=shuffledChoices[currentQ];
+  const card=document.createElement('div');card.className='q-card';
+  const num=document.createElement('div');num.className='q-num';
+  num.textContent='QUESTION '+(currentQ+1)+' / '+TOTAL;card.appendChild(num);
+  const qt=document.createElement('div');qt.className='q-text';qt.textContent=q.text;card.appendChild(qt);
+  if(q.hint){const h=document.createElement('div');h.className='q-hint';h.textContent=q.hint;card.appendChild(h);}
+  const ch=document.createElement('div');ch.className='choices';
+  orderedChoices.forEach(c=>{
+    const btn=document.createElement('button');btn.className='c-btn';btn.textContent=c.label;
+    btn.onclick=()=>choose(c.scores);ch.appendChild(btn);
+  });
+  card.appendChild(ch);
+  if(currentQ>0){
+    const back=document.createElement('button');back.className='back-btn';
+    back.textContent='← 前の質問に戻る';back.onclick=goBack;card.appendChild(back);
+  }
+  main.appendChild(card);
+}
+function choose(scores){
+  answers=answers.filter(a=>a.qi!==currentQ);
+  answers.push({qi:currentQ,scores});
+  currentQ++;
+  if(currentQ>=TOTAL){showResult();}else{render();}
+}
+function goBack(){
+  if(currentQ===0)return;
+  currentQ--;
+  answers=answers.filter(a=>a.qi!==currentQ);
+  render();
+}
+function showResult(){
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('prog-label').textContent=TOTAL+' / '+TOTAL;
+  const s=calcScores();const maxScore=TOTAL*3;const rank=ranking(s);
+  const main=document.getElementById('main');main.innerHTML='';
+  const wrap=document.createElement('div');wrap.className='result-wrap';
+  const d1=DEPT[rank[0].key];
+  const top=document.createElement('div');top.className='result-top';top.style.borderTop='4px solid '+d1.color;
+  el(top,'div','r-announce','🏆  あなたへのおすすめ  第1位');
+  const topName=el(top,'div','r-rank1-name',d1.name);topName.style.color=d1.color;
+  el(top,'p','r-catch',d1.catch);
+  const ex=document.createElement('div');ex.className='r-ex';
+  ex.style.background=d1.bg;ex.style.color=d1.color;ex.style.borderLeftColor=d1.exborder;
+  ex.textContent=d1.ex;top.appendChild(ex);
+  el(top,'p','r-desc',d1.desc);
+  const ms=document.createElement('div');ms.style.marginBottom='1.25rem';
+  rank.forEach(item=>{
+    const k=item.key;const deptColor=DEPT[k].color;
+    const pct=Math.round(s[k]/maxScore*100);
+    const row=document.createElement('div');row.className='score-row';
+    const lbl=document.createElement('span');lbl.className='score-label';lbl.style.color=deptColor;lbl.textContent=DEPT[k].name;
+    const track=document.createElement('div');track.className='score-track';
+    const fill=document.createElement('div');fill.className='score-fill';
+    fill.style.background=deptColor;fill.style.width='0%';
+    setTimeout(()=>{fill.style.width=pct+'%';},100);
+    track.appendChild(fill);
+    const pl=document.createElement('span');pl.className='score-pct';pl.textContent=pct+'%';
+    row.appendChild(lbl);row.appendChild(track);row.appendChild(pl);ms.appendChild(row);
+  });
+  top.appendChild(ms);
+  const pts=document.createElement('div');pts.className='r-pts';
+  d1.points.forEach(p=>{
+    const row=document.createElement('div');row.className='pt-row';
+    const ic=document.createElement('span');ic.className='pt-ic';ic.textContent=p.ic;
+    const tx=document.createElement('div');tx.className='pt-tx';tx.textContent=p.t;
+    row.appendChild(ic);row.appendChild(tx);pts.appendChild(row);
+  });
+  top.appendChild(pts);
+  el(top,'p','r-career-lbl','主な就職先イメージ');
+  el(top,'p','r-career',d1.career);
+  const link=document.createElement('a');link.className='r-link';link.href=d1.url;link.target='_blank';
+  link.style.color=d1.color;link.style.borderColor=d1.color;link.textContent='学科の詳細を見る →';top.appendChild(link);
+  wrap.appendChild(top);
+  el(wrap,'p','others-title','他の学科との相性');
+  const ow=document.createElement('div');ow.className='rank-others';
+  [1,2].forEach(ri=>{
+    const d=DEPT[rank[ri].key];const deptColor=d.color;const pct=Math.round(rank[ri].score/maxScore*100);
+    const c2=document.createElement('div');c2.className='rank-card';c2.style.borderLeft='4px solid '+d.color;
+    const badge=document.createElement('div');badge.className='rank-badge';
+    badge.style.color=deptColor;badge.textContent=ri===1?'2位':'3位';c2.appendChild(badge);
+    const body=document.createElement('div');body.className='rank-body';
+    const rn=el(body,'div','rank-name',d.name);rn.style.color=d.color;el(body,'div','rank-sub',d.catch);
+    const bw=document.createElement('div');bw.className='rank-bar-wrap';
+    const bar=document.createElement('div');bar.className='rank-bar';
+    bar.style.background=deptColor;bar.style.width='0%';
+    setTimeout(()=>{bar.style.width=pct+'%';},200);bw.appendChild(bar);body.appendChild(bw);
+    el(body,'div','rank-pct','スコア '+pct+'%');c2.appendChild(body);
+    const lnk=document.createElement('a');lnk.className='rank-link';lnk.href=d.url;lnk.target='_blank';
+    lnk.style.color=deptColor;lnk.textContent='詳細 →';c2.appendChild(lnk);
+    ow.appendChild(c2);
+  });
+  wrap.appendChild(ow);
+  const retry=document.createElement('button');retry.className='retry-btn';
+  retry.textContent='もう一度診断する';retry.onclick=reset;wrap.appendChild(retry);
+  main.appendChild(wrap);
+}
+function el(parent,tag,cls,text){
+  const e=document.createElement(tag);e.className=cls;e.textContent=text;parent.appendChild(e);return e;
+}
+function reset(){answers=[];currentQ=0;buildShuffledChoices();render();}
+buildShuffledChoices();
+render();
+</script>
+</body>
+</html>
