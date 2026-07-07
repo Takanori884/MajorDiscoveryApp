@@ -166,6 +166,7 @@ body.question-mode .container{padding-top:24px;}
 .q-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 18px 18px;box-shadow:var(--shadow);animation:fi .24s ease;}
 @keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .q-num{font-size:11px;letter-spacing:.1em;color:#667085;margin-bottom:10px;font-weight:800;}
+.q-guide{font-size:14px;font-weight:800;color:#5b6577;line-height:1.75;margin:0 0 14px;padding:0 1px;}
 .q-text{font-size:18px;font-weight:800;color:var(--text);line-height:1.65;margin-bottom:16px;}
 .choices{display:flex;flex-direction:column;gap:11px;}
 .c-btn{background:#eef3fb;border:1.5px solid #5a8fe0;border-radius:14px;padding:15px 16px;text-align:left;cursor:pointer;font-size:15px;color:#222;line-height:1.6;font-family:inherit;font-weight:700;transition:background .13s,transform .1s;}
@@ -625,6 +626,12 @@ function render(){
   num.className='q-num';
   num.textContent='QUESTION '+(currentQ+1);
   card.appendChild(num);
+  if(currentQ===0){
+    const guide=document.createElement('div');
+    guide.className='q-guide';
+    guide.textContent='あなたの考えに一番近い選択肢を、直感的に選んでください。正解・不正解はありません。';
+    card.appendChild(guide);
+  }
   const qt=document.createElement('div');
   qt.className='q-text';
   qt.textContent=q.text;
