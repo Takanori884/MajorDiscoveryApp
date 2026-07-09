@@ -92,8 +92,17 @@ button,a{-webkit-tap-highlight-color:transparent;}
   align-items:flex-end;
   justify-content:center;
   gap:0;
-  margin:0 0 18px;
+  margin:0 0 10px;
   padding:0;
+}
+.start-character-caption{
+  color:#5b6577;
+  font-size:13px;
+  font-weight:900;
+  line-height:1.5;
+  text-align:center;
+  margin:0 0 16px;
+  letter-spacing:.02em;
 }
 .start-character{
   flex:1 1 0;
@@ -222,20 +231,25 @@ body.question-mode .container{padding-top:24px;}
 .event-action-row{display:flex;justify-content:flex-end;margin-top:12px;}
 .event-btn{appearance:none;border:none;border-radius:999px;background:linear-gradient(135deg,var(--event-accent,#5a8fe0),var(--event-main,#344054));color:#fff;font-size:12px;font-weight:900;line-height:1.3;padding:10px 14px;min-height:40px;font-family:inherit;box-shadow:0 8px 16px rgba(16,24,40,.12);cursor:pointer;}
 .event-btn:active{transform:scale(.98);filter:brightness(.98);}
-.feedback-area{margin:20px 0 12px;padding:16px 15px;border:1px solid #dfe6f0;border-radius:18px;background:#f4f7fb;text-align:center;box-shadow:0 4px 14px rgba(16,24,40,.05);}
-.feedback-title{font-size:15px;font-weight:900;color:var(--brand);line-height:1.5;margin-bottom:5px;}
-.feedback-lead{font-size:12px;font-weight:800;color:#667085;line-height:1.65;margin-bottom:12px;}
-.feedback-btn{appearance:none;border:none;border-radius:999px;width:100%;min-height:46px;padding:12px 16px;background:linear-gradient(135deg,#34495E,#5B6E8C);color:#fff;font-size:14px;font-weight:900;line-height:1.35;font-family:inherit;box-shadow:0 10px 20px rgba(52,73,94,.16);cursor:pointer;}
-.feedback-btn:active{transform:scale(.99);filter:brightness(.98);}
-.feedback-btn.sent{background:#fff;color:#5B6E8C;border:1.5px solid #d0d5dd;box-shadow:none;cursor:default;}
-.feedback-btn:disabled{opacity:1;}
-.feedback-modal-lead{font-size:13px;font-weight:800;color:#475467;line-height:1.7;margin-bottom:13px;}
-.feedback-options{display:flex;flex-direction:column;gap:10px;}
-.feedback-option{appearance:none;width:100%;border:1.5px solid #5a8fe0;border-radius:14px;background:#eef3fb;color:#222;text-align:left;padding:14px 15px;font-size:14px;font-weight:800;line-height:1.55;font-family:inherit;cursor:pointer;transition:background .13s,transform .1s;}
-.feedback-option:active{transform:scale(.99);background:#e2ebf9;}
-.feedback-option.selected{background:#FFF3E3;border-color:#F08C16;box-shadow:0 0 0 2px rgba(240,140,22,.18);}
-.feedback-options.locked .feedback-option{pointer-events:none;}
-.feedback-options.locked .feedback-option:not(.selected){opacity:.55;}
+.feedback-area{margin:20px 0 12px;padding:16px 15px;border:1px solid #dfe6f0;border-radius:18px;background:#f4f7fb;text-align:left;box-shadow:0 4px 14px rgba(16,24,40,.05);}
+.feedback-title{font-size:15px;font-weight:900;color:var(--brand);line-height:1.5;margin-bottom:5px;text-align:center;}
+.feedback-lead{font-size:12px;font-weight:800;color:#667085;line-height:1.65;margin-bottom:12px;text-align:center;}
+.feedback-hint{font-size:12px;font-weight:800;color:#5b6577;line-height:1.6;margin:0 0 10px;text-align:center;}
+.feedback-choice-list{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+.feedback-choice{appearance:none;width:100%;border:1.5px solid #d5deea;border-radius:14px;background:#fff;color:#222;text-align:left;padding:12px 13px;font-size:14px;font-weight:800;line-height:1.55;font-family:inherit;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:background .13s,border-color .13s,box-shadow .13s,transform .1s;}
+.feedback-choice:active{transform:scale(.99);background:#f7f9fc;}
+.feedback-choice.selected{background:#FFF3E3;border-color:#F08C16;box-shadow:0 0 0 2px rgba(240,140,22,.18);}
+.feedback-choice:disabled{cursor:default;}
+.feedback-check{flex:0 0 auto;width:21px;height:21px;border:2px solid #98a2b3;border-radius:6px;background:#fff;margin-top:1px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:900;line-height:1;}
+.feedback-choice.selected .feedback-check{border-color:#F08C16;background:#F08C16;}
+.feedback-choice.selected .feedback-check::before{content:'✓';}
+.feedback-choice-text{flex:1;min-width:0;}
+.feedback-submit{appearance:none;border:none;border-radius:999px;width:100%;min-height:46px;padding:12px 16px;background:linear-gradient(135deg,#34495E,#5B6E8C);color:#fff;font-size:14px;font-weight:900;line-height:1.35;font-family:inherit;box-shadow:0 10px 20px rgba(52,73,94,.16);cursor:pointer;}
+.feedback-submit:active{transform:scale(.99);filter:brightness(.98);}
+.feedback-submit:disabled{background:#d0d5dd;color:#fff;box-shadow:none;cursor:default;}
+.feedback-done{text-align:center;padding:4px 2px 2px;}
+.feedback-done-title{font-size:16px;font-weight:900;color:var(--brand);line-height:1.6;margin-bottom:4px;}
+.feedback-done-note{font-size:12px;font-weight:800;color:#667085;line-height:1.65;}
 .feedback-thanks{font-size:18px;font-weight:900;color:var(--brand);line-height:1.6;text-align:center;padding:22px 8px 6px;}
 .feedback-note{font-size:13px;font-weight:800;color:#667085;line-height:1.7;text-align:center;margin-top:6px;}
 
@@ -245,6 +259,8 @@ body.question-mode .container{padding-top:24px;}
 .event-dialog{position:relative;width:min(92vw,420px);max-height:min(82svh,680px);overflow:auto;background:#fff;border:1.5px solid #cfd8e5;border-radius:24px;padding:20px 18px 18px;box-shadow:0 28px 70px rgba(16,24,40,.32),0 0 0 1px rgba(255,255,255,.72) inset;animation:modalIn .18s ease both;}
 @keyframes modalIn{from{opacity:0;transform:translateY(8px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
 .event-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.event-modal.thanks-only .event-modal-head{justify-content:flex-end;margin-bottom:0;}
+.event-modal.thanks-only .event-modal-head>div{display:none;}
 .event-modal-title{font-size:19px;font-weight:900;line-height:1.35;color:var(--brand);}
 .event-modal-sub{font-size:12px;font-weight:800;color:#667085;margin-top:4px;line-height:1.5;}
 .event-close{appearance:none;border:1px solid #d0d5dd;background:#fff;color:#667085;border-radius:999px;width:34px;height:34px;font-size:20px;line-height:1;font-weight:900;cursor:pointer;flex:0 0 auto;}
@@ -265,7 +281,8 @@ body.question-mode .container{padding-top:24px;}
   .start-screen{padding-left:16px;padding-right:16px;}
   .start-title{font-size:30px;gap:.18em;margin-bottom:10px;}
   .start-lead{margin:0 0 12px;max-width:320px;}
-  .start-characters{margin-bottom:16px;}
+  .start-characters{margin-bottom:8px;}
+  .start-character-caption{font-size:12px;margin-bottom:14px;}
   .start-character{margin:0 -10px;max-width:150px;}
   .start-character img{max-height:min(39svh,272px);}
   .start-character .dept-label{font-size:10px;}
@@ -314,6 +331,7 @@ body.question-mode .container{padding-top:24px;}
       </figcaption>
     </figure>
   </div>
+  <p class="start-character-caption">情報学部のキャラクター</p>
   <button id="start-btn" class="start-btn" type="button">はじめる</button>
   <p class="start-note">学科紹介の改善のため、<br>個人が分からない形で回答を集計します</p>
 </div>
@@ -459,10 +477,10 @@ const QS=[
     {choiceId:"2_b",label:"予約や注文をスムーズにできるスマホアプリ",scores:{cs:1,sys:4,mg:1}},
     {choiceId:"2_c",label:"売上データから商品や人手を予測するツール",scores:{cs:1,sys:1,mg:4}}
   ]},
-  {id:"q3",text:"YouTubeやSNSを見ているとき、一番気になりやすいのはどれ？",choices:[
-    {choiceId:"3_a",label:"動画や投稿をスムーズに表示する仕組み",scores:{cs:4,sys:1,mg:1}},
-    {choiceId:"3_b",label:"動画や投稿を探しやすくする工夫",scores:{cs:1,sys:4,mg:1}},
-    {choiceId:"3_c",label:"視聴データから利用者の好みを分析する方法",scores:{cs:1,sys:1,mg:4}}
+  {id:"q3",text:"YouTubeやSNSを使っているとき、どんなことが気になりやすい？",choices:[
+    {choiceId:"3_a",label:"動画が止まらずに再生される仕組み",scores:{cs:4,sys:1,mg:1}},
+    {choiceId:"3_b",label:"直感的に操作できるようにする工夫",scores:{cs:1,sys:4,mg:1}},
+    {choiceId:"3_c",label:"人それぞれの「おすすめ」を決める方法",scores:{cs:1,sys:1,mg:4}}
   ]},
   {id:"q4",text:"将来、自分が関わったもので、一番うれしく感じそうなのは？",choices:[
     {choiceId:"4_a",label:"身近なシステムを支える技術が安定して動くとき",scores:{cs:4,sys:1,mg:1}},
@@ -890,64 +908,67 @@ function fitOneLineText(selector,max,min){
 window.addEventListener('resize',fitDeptNamesOneLine);
 function createFeedbackArea(){
   const area=document.createElement('section');
+  area.id='feedback-area';
   area.className='feedback-area';
   el(area,'div','feedback-title','結果はどうでしたか？');
-  el(area,'p','feedback-lead','高校生のみなさんの反応を、今後の学科紹介に活かします');
-  const btn=document.createElement('button');
-  btn.id='feedback-btn';
-  btn.className='feedback-btn';
-  btn.type='button';
   if(feedbackSent){
-    btn.textContent='ご協力ありがとうございました';
-    btn.disabled=true;
-    btn.classList.add('sent');
-  }else{
-    btn.textContent='📝 結果へのリアクションを送る';
-    btn.addEventListener('click',openFeedbackModal);
+    renderFeedbackDone(area);
+    return area;
   }
-  area.appendChild(btn);
+  el(area,'p','feedback-lead','高校生のみなさんの反応を、今後の学科紹介に活かします');
+  el(area,'p','feedback-hint','あてはまるものを1つ選んでから送ってください');
+  const list=document.createElement('div');
+  list.className='feedback-choice-list';
+  list.setAttribute('role','radiogroup');
+  list.setAttribute('aria-label','結果へのリアクション');
+  FEEDBACK_OPTIONS.forEach(option=>{
+    const btn=document.createElement('button');
+    btn.className='feedback-choice';
+    btn.type='button';
+    btn.setAttribute('role','radio');
+    btn.setAttribute('aria-checked','false');
+    btn.dataset.reactionId=option.id;
+    const check=document.createElement('span');
+    check.className='feedback-check';
+    check.setAttribute('aria-hidden','true');
+    const label=document.createElement('span');
+    label.className='feedback-choice-text';
+    label.textContent=option.label;
+    btn.appendChild(check);
+    btn.appendChild(label);
+    btn.addEventListener('click',()=>selectFeedbackChoice(option.id));
+    list.appendChild(btn);
+  });
+  area.appendChild(list);
+  const submit=document.createElement('button');
+  submit.id='feedback-submit';
+  submit.className='feedback-submit';
+  submit.type='button';
+  submit.textContent='リアクションを送る';
+  submit.disabled=true;
+  submit.addEventListener('click',submitSelectedFeedback);
+  area.appendChild(submit);
   return area;
 }
-function updateFeedbackArea(){
-  const btn=document.getElementById('feedback-btn');
-  if(!btn)return;
-  btn.textContent='ご協力ありがとうございました';
-  btn.disabled=true;
-  btn.classList.add('sent');
-}
-function openFeedbackModal(){
-  eventModalTitle.textContent='結果へのリアクション';
-  eventModalTitle.style.color='#1a3060';
-  eventModalSub.textContent='結果を見てどう感じましたか？';
-  eventModalBody.innerHTML='';
-  if(feedbackSent){
-    showFeedbackThanks();
-  }else{
-    el(eventModalBody,'p','feedback-modal-lead','あてはまるものを1つ選んでください');
-    const list=document.createElement('div');
-    list.className='feedback-options';
-    FEEDBACK_OPTIONS.forEach(option=>{
-      const btn=document.createElement('button');
-      btn.className='feedback-option';
-      btn.type='button';
-      btn.textContent=option.label;
-      btn.addEventListener('click',()=>submitFeedbackWithFeedback(btn,list,option.id));
-      list.appendChild(btn);
-    });
-    eventModalBody.appendChild(list);
-  }
-  eventModal.classList.add('open');
-  eventModal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-  eventClose.focus();
-}
-function submitFeedbackWithFeedback(btn,list,reactionId){
+function selectFeedbackChoice(reactionId){
   if(feedbackSent)return;
-  list.querySelectorAll('.feedback-option').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  list.classList.add('locked');
-  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  setTimeout(()=>submitFeedback(reactionId),reduceMotion?40:200);
+  selectedReactionId=reactionId;
+  document.querySelectorAll('.feedback-choice').forEach(btn=>{
+    const selected=btn.dataset.reactionId===reactionId;
+    btn.classList.toggle('selected',selected);
+    btn.setAttribute('aria-checked',selected?'true':'false');
+  });
+  const submit=document.getElementById('feedback-submit');
+  if(submit)submit.disabled=false;
+}
+function submitSelectedFeedback(){
+  if(feedbackSent||!selectedReactionId)return;
+  const submit=document.getElementById('feedback-submit');
+  if(submit){
+    submit.disabled=true;
+    submit.textContent='送信しています';
+  }
+  submitFeedback(selectedReactionId);
 }
 function submitFeedback(reactionId){
   if(feedbackSent)return;
@@ -957,11 +978,37 @@ function submitFeedback(reactionId){
   updateFeedbackArea();
   showFeedbackThanks();
 }
+function updateFeedbackArea(){
+  const area=document.getElementById('feedback-area');
+  if(!area)return;
+  area.innerHTML='';
+  el(area,'div','feedback-title','結果はどうでしたか？');
+  renderFeedbackDone(area);
+}
+function renderFeedbackDone(area){
+  const done=document.createElement('div');
+  done.className='feedback-done';
+  el(done,'div','feedback-done-title','ご協力ありがとうございました');
+  const selected=FEEDBACK_OPTIONS.find(option=>option.id===selectedReactionId);
+  if(selected){
+    el(done,'p','feedback-done-note','送信したリアクション：'+selected.label);
+  }else{
+    el(done,'p','feedback-done-note','リアクションを送信しました');
+  }
+  area.appendChild(done);
+}
 function showFeedbackThanks(){
-  eventModalSub.textContent='送信しました';
+  eventModal.classList.add('thanks-only');
+  eventModalTitle.textContent='';
+  eventModalTitle.style.color='#1a3060';
+  eventModalSub.textContent='';
   eventModalBody.innerHTML='';
   el(eventModalBody,'div','feedback-thanks','ご協力ありがとうございました');
   el(eventModalBody,'p','feedback-note','結果画面に戻って、引き続き学科の情報を見ることができます');
+  eventModal.classList.add('open');
+  eventModal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  eventClose.focus();
 }
 function createEventButton(key){
   const d=DEPT[key];
@@ -997,6 +1044,7 @@ function appendEventTitle(parent,title){
   return titleEl;
 }
 function openEventModal(key){
+  eventModal.classList.remove('thanks-only');
   const d=DEPT[key];
   const info=EVENT_INFO[key];
   if(!d||!info)return;
@@ -1031,6 +1079,7 @@ function openEventModal(key){
 function closeEventModal(){
   if(!eventModal.classList.contains('open'))return;
   eventModal.classList.remove('open');
+  eventModal.classList.remove('thanks-only');
   eventModal.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 }
